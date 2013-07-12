@@ -107,7 +107,8 @@ func handle_track( w http.ResponseWriter, r *http.Request ) {
         return;
     }
 
-    w.Write( f);
+    w.Header().Add("Content-Type", "audio/mpeg");
+    w.Write(f);
 }
 
 func load_config() {
