@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <script src="/script/jquery-2.0.3.min.js"></script>
+        <script src="/script/audiojs/audiojs/audio.min.js"></script>
+        <script>
+            var library; 
+            var player;
+
+            audiojs.events.ready(function() {
+                player = audiojs.createAll()[0];
+                
+                $.ajax("/api/home", {
+                    "dataType": "json",
+                    "success": function(d) {
+                        console.log(d);
+                        library = d;
+                        init()
+                    }
+                });
+            });
+
+            function init() {
+                for(var i=0; i< library.length; i++)
+                {
+                    server = library[i];
+                    for(var j=0; j< server.Artists.length; j++)
+                    {
+                        artist = server.Artists[j];
+                        for(var k=0; k< artist.Albums.length; k++)
+                        {
+                            album = artist.Albums[k];
+                            document.getElementById("area-albums").innerHTML +=
+                                '<div class="album" onclick="play_album('+i+','+j+','+k+');">'+
+                                    '<div class="album-image">'+
+                                        '<span><img src="//'+album.Cover+'"/></span>'+
+                                    '</div>'+
+                                    '<span class="album-name">'+album.Name+'</span><br/>'+
+                                    '<span class="album-artist">'+artist.Name+'</span><br/>'+
+                                '</div>';
+
+                        }
+                    }
+                }
+            }
+
+            function play_track(i,j,k,l) {
+                track = library[i].Artists[j].Albums[k].Tracks[l];
+                player.load("//"+track.Url);
+                player.play()
+            }
+
+            function play_album(i,j,k) {
+                album = library[i].Artists[j].Albums[k];
+                play_track(i,j,k,0);
+
+                // populate the left menu
+                document.getElementById("left-menu-data").style.display = "";
+                document.getElementById("left-menu-get-started").style.display = "none";
+                document.getElementById("left-menu-img").src = "//"+album.Cover;
+                tracks = document.getElementById("left-menu-tracks");
+                
+                tracks.innerHTML = "";
+                for(var l=0; l< album.Tracks.length; l++)
+                {
+                    track = album.Tracks[l];
+                    tracks.innerHTML += 
+                        '<a href="javascript:void();" onclick="play_track('+i+','+j+','+k+','+l+')">'+track.Name+"</a><br/>";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <style>
+            #container {
+                margin-left: 275px;
+            }
+
+            .album {
+                float: left;
+                width: 250px;
+                height: auto;
+                margin: 10px;
+                text-align: center;
+            }
+            .album >.album-image {
+                overflow: hidden;
+                width: 250px;
+                height: 250px;
+                background: #222;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .album >.album-image > span {
+                display:block;
+                width:1000px; /* hack, i know. shut up */
+                margin-left: -375px; /* -(^width - (container width) / 2) */
+            }
+            .album > .album-image > span > img {
+                display: inline-block;
+                height: auto;
+                max-height: 100%;
+                margin-right: auto;
+            }
+            .album > span {
+                line-height: 1.5em
+            }
+
+            #now-playing {
+                position: fixed;
+                width: 270px;
+                height: 100%;
+                top:0px;
+                left:0;
+                /*right: 0;*/
+                padding: 5px;
+                background-color: #888;
+                margin-left: auto;
+                overflow:auto;
+            }
+        </style>
+        <div id="now-playing">
+            <div id="left-menu-data" style="display:none;">
+                <div class="album">
+                    <div class="album-image">
+                        <span><img id="left-menu-img" src="//[::1]:54321/cover/birdmask/bird-mask"/></span>
+                    </div>
+                </div>
+                <div id="left-menu-tracks"></div>
+            </div>
+            <div id="left-menu-get-started">
+                Click on an album cover to get started!
+            </div>
+        </div>
+        <div id="container">
+            <div style="padding-left:10px"> <audio preload="auto"></audio> </div>
+            <div id="area-albums">
+                <!--
+                <div class="album">
+                    <div class="album-image">
+                        <span><img src="http://[::1]:54321/cover/birdmask/bird-mask"/></span>
+                    </div>
+                    <span class="album-name">TEST Bird Mask</span><br/>
+                    <span class="album-artist">by Birdmask</span>
+                </div>
+                -->
+            </div>
+        </div>
+    </body>
+</html>
