@@ -5,14 +5,24 @@
         <script>
             var library; 
             var player;
+            var current_track;
 
             audiojs.events.ready(function() {
-                player = audiojs.createAll()[0];
+                player = audiojs.createAll({
+                    trackEnded: function() {
+                        i = current_track[0];
+                        j = current_track[1];
+                        k = current_track[2];
+                        l = current_track[3]+1;
+                        if(typeof library[i].Artists[j].Albums[k].Tracks[i] != "undefined") {
+                            play_track(i,j,k,l)
+                        }
+                    }
+                })[0];
                 
                 $.ajax("/api/home", {
                     "dataType": "json",
                     "success": function(d) {
-                        console.log(d);
                         library = d;
                         init()
                     }
@@ -32,7 +42,7 @@
                             document.getElementById("area-albums").innerHTML +=
                                 '<div class="album" onclick="play_album('+i+','+j+','+k+');">'+
                                     '<div class="album-image">'+
-                                        '<span><img src="//'+album.Cover+'"/></span>'+
+                                        '<span>'+(typeof album.Cover != "undefined" && album.Cover.length > 0 ? '<img src="//'+album.Cover+'"/>' : "No Image")+'</span>'+
                                     '</div>'+
                                     '<span class="album-name">'+album.Name+'</span><br/>'+
                                     '<span class="album-artist">'+artist.Name+'</span><br/>'+
@@ -44,6 +54,7 @@
             }
 
             function play_track(i,j,k,l) {
+                current_track = [i,j,k,l];
                 track = library[i].Artists[j].Albums[k].Tracks[l];
                 player.load("//"+track.Url);
                 player.play()
@@ -71,6 +82,9 @@
     </head>
     <body>
         <style>
+            body {
+                background-color: #e5e5e5;
+            }
             #container {
                 margin-left: 275px;
             }
@@ -94,6 +108,8 @@
                 display:block;
                 width:1000px; /* hack, i know. shut up */
                 margin-left: -375px; /* -(^width - (container width) / 2) */
+                color: white;
+                font-size: 1.5em;
             }
             .album > .album-image > span > img {
                 display: inline-block;
@@ -107,13 +123,13 @@
 
             #now-playing {
                 position: fixed;
-                width: 270px;
+                width: 265px;
                 height: 100%;
                 top:0px;
                 left:0;
                 /*right: 0;*/
                 padding: 5px;
-                background-color: #888;
+                background-color: #ccc;
                 margin-left: auto;
                 overflow:auto;
             }
@@ -138,6 +154,15 @@
                 <div class="album">
                     <div class="album-image">
                         <span><img src="http://[::1]:54321/cover/birdmask/bird-mask"/></span>
+                    </div>
+                    <span class="album-name">TEST Bird Mask</span><br/>
+                    <span class="album-artist">by Birdmask</span>
+                </div>
+                -->
+                <!--
+                <div class="album">
+                    <div class="album-image">
+                        <span>No Image</span>
                     </div>
                     <span class="album-name">TEST Bird Mask</span><br/>
                     <span class="album-artist">by Birdmask</span>
