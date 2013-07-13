@@ -1,20 +1,36 @@
 {
-    "albums": [
+    "artists": [
         {
-            "id": "bird-mask",
-            "name": "Bird Mask",
-            "cover": "/home/liam/Downloads/Birdmask/Birdmask/cover.jpg",
-            "artist": "Birdmask",
-            "tracks": [
-                ["Doubt", "doubt", "/home/liam/Downloads/Birdmask/Birdmask/01 Doubt.mp3"],
-                ["Clementine", "clementine", "/home/liam/Downloads/Birdmask/Birdmask/02 Clementine.mp3"],
-                ["Crowns", "crowns", "/home/liam/Downloads/Birdmask/Birdmask/03 Crowns.mp3"],
-                ["Burn", "burn", "/home/liam/Downloads/Birdmask/Birdmask/04 Burn.mp3"],
-                ["Acadia", "acadia", "/home/liam/Downloads/Birdmask/Birdmask/05 Acadia.mp3"],
-                ["Far from Over", "far-from-over", "/home/liam/Downloads/Birdmask/Birdmask/06 Far from Over.mp3"],
-                ["I Come Prepared", "i-come-prepared", "/home/liam/Downloads/Birdmask/Birdmask/07 I Come Prepared.mp3"],
-                ["Your Fall", "your-fall", "/home/liam/Downloads/Birdmask/Birdmask/08 Your Fall.mp3"],
-                ["Reverie in Green", "reverie-in-green", "/home/liam/Downloads/Birdmask/Birdmask/09 Reverie in Green.mp3"]
+            "name": "Birdmask",
+            "id": "birdmask",
+            "albums": [
+                {
+                    "id": "bird-mask",
+                    "name": "Bird Mask",
+                    "cover": "/home/liam/Downloads/Birdmask/Birdmask/cover.jpg",
+                    "tracks": [
+                        ["Doubt", "doubt", "/home/liam/Downloads/Birdmask/Birdmask/01 Doubt.mp3"],
+                        ["Clementine", "clementine", "/home/liam/Downloads/Birdmask/Birdmask/02 Clementine.mp3"],
+                        ["Crowns", "crowns", "/home/liam/Downloads/Birdmask/Birdmask/03 Crowns.mp3"],
+                        ["Burn", "burn", "/home/liam/Downloads/Birdmask/Birdmask/04 Burn.mp3"],
+                        ["Acadia", "acadia", "/home/liam/Downloads/Birdmask/Birdmask/05 Acadia.mp3"],
+                        ["Far from Over", "far-from-over", "/home/liam/Downloads/Birdmask/Birdmask/06 Far from Over.mp3"],
+                        ["I Come Prepared", "i-come-prepared", "/home/liam/Downloads/Birdmask/Birdmask/07 I Come Prepared.mp3"],
+                        ["Your Fall", "your-fall", "/home/liam/Downloads/Birdmask/Birdmask/08 Your Fall.mp3"],
+                        ["Reverie in Green", "reverie-in-green", "/home/liam/Downloads/Birdmask/Birdmask/09 Reverie in Green.mp3"]
+                    ]
+                },
+                {
+                    "id": "je-t'embrasse",
+                    "name": "JE T'EMBRASSE",
+                    "cover": "/home/liam/Downloads/Birdmask/JE T'EMBRASSE/cover.jpg",
+                    "tracks": [
+                        ["Phun with Fonetics", "phun-with-fonetics", "/home/liam/Downloads/Birdmask/JE T'EMBRASSE/01 Phun with Fonetics.mp3"],
+                        ["Alter Id", "alter-id", "/home/liam/Downloads/Birdmask/JE T'EMBRASSE/02 Alter Id.mp3"],
+                        ["Hide", "hide", "/home/liam/Downloads/Birdmask/JE T'EMBRASSE/03 Hide.mp3"],
+                        ["Gertrude's Foe", "gertrudes-foe", "/home/liam/Downloads/Birdmask/JE T'EMBRASSE/04 Gertrude's Foe.mp3"]
+                    ]
+                }
             ]
         }
     ]
